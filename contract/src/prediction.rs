@@ -671,7 +671,7 @@ pub fn batch_distribute_payouts(
 mod prediction_tests {
     use soroban_sdk::testutils::{Address as _, Ledger as _};
     use soroban_sdk::token::{Client as TokenClient, StellarAssetClient};
-    use soroban_sdk::{symbol_short, vec, Address, Env, String};
+    use soroban_sdk::{symbol_short, vec, Address, Env, String, Symbol};
 
     use crate::market::CreateMarketParams;
     use crate::{InsightArenaContract, InsightArenaContractClient, InsightArenaError};
@@ -701,7 +701,7 @@ mod prediction_tests {
         CreateMarketParams {
             title: String::from_str(env, "Will it rain?"),
             description: String::from_str(env, "Daily weather market"),
-            category: symbol_short!("weather"),
+            category: Symbol::new(env, "Sports"),
             outcomes: vec![env, symbol_short!("yes"), symbol_short!("no")],
             end_time: now + 1000,
             resolution_time: now + 2000,

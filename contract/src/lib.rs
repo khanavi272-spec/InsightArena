@@ -105,6 +105,39 @@ impl InsightArenaContract {
         market::create_market(&env, creator, params)
     }
 
+    /// Add a category to the admin-managed whitelist used during market creation.
+    pub fn add_category(
+        env: Env,
+        admin: Address,
+        category: Symbol,
+    ) -> Result<(), InsightArenaError> {
+        market::add_category(&env, admin, category)
+    }
+
+    /// Remove a category from the whitelist for future market creation.
+    pub fn remove_category(
+        env: Env,
+        admin: Address,
+        category: Symbol,
+    ) -> Result<(), InsightArenaError> {
+        market::remove_category(&env, admin, category)
+    }
+
+    /// Return the current category whitelist.
+    pub fn list_categories(env: Env) -> Vec<Symbol> {
+        market::list_categories(&env)
+    }
+
+    /// Return markets for a category using a zero-based offset in that category's index.
+    pub fn get_markets_by_category(
+        env: Env,
+        category: Symbol,
+        start: u64,
+        limit: u32,
+    ) -> Vec<Market> {
+        market::get_markets_by_category(&env, category, start, limit)
+    }
+
     /// Fetch a market by ID. Returns `MarketNotFound` if it does not exist.
     pub fn get_market(env: Env, market_id: u64) -> Result<Market, InsightArenaError> {
         market::get_market(&env, market_id)

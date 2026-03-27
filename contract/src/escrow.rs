@@ -257,14 +257,14 @@ mod escrow_tests {
 
     fn seed_unresolved_market(env: &Env, client: &InsightArenaContractClient<'_>, market_id: u64) {
         use crate::storage_types::Market;
-        use soroban_sdk::{symbol_short, vec, String};
+        use soroban_sdk::{symbol_short, vec, String, Symbol};
 
         let market = Market::new(
             market_id,
             Address::generate(env),
             String::from_str(env, "seeded market"),
             String::from_str(env, "seeded for escrow tests"),
-            symbol_short!("audit"),
+            Symbol::new(env, "Sports"),
             vec![env, symbol_short!("yes"), symbol_short!("no")],
             env.ledger().timestamp(),
             env.ledger().timestamp() + 100,
